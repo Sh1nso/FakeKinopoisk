@@ -18,7 +18,7 @@ class JwtService:
         if None in [email, password]:
             return abort(401)
 
-        user = user_service.get_user_by_email(email)
+        user = user_service.get_user_by_username(email)
         if not user:
             return {"error": "Неверные учётные данные"}, 401
 

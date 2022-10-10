@@ -7,7 +7,7 @@ from service.jwt_service import jwt_object
 auth_ns = Namespace('auth')
 
 
-@auth_ns.route('/login')
+@auth_ns.route('/login/')
 class AuthView(Resource):
     def post(self):
         tokens = jwt_object.give_user_jwt_token()
@@ -29,4 +29,4 @@ class RegisterView(Resource):
         if None in [email, password]:
             return 'Введите необходимые данные', 404
         user = user_service.create(req_user)
-        return user, 201
+        return 201

@@ -15,9 +15,7 @@ class UserDAO:
         return self.session.query(User).filter(User.email == email).first()
 
     def create(self, user_d):
-        user = User()
-        user.email = user_d.get('email')
-        user.password = user_d.get('password')
+        user = User(**user_d)
         self.session.add(user)
         self.session.commit()
         return user

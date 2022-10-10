@@ -6,7 +6,7 @@ from implemented import director_service
 director_ns = Namespace('directors')
 
 
-@director_ns.route('//')
+@director_ns.route('/')
 class DirectorsView(Resource):
     def get(self):
         rs = director_service.get_all()
@@ -14,7 +14,7 @@ class DirectorsView(Resource):
         return res, 200
 
 
-@director_ns.route('/<int:rid>')
+@director_ns.route('/<int:rid>/')
 class DirectorView(Resource):
     def get(self, rid):
         r = director_service.get_one(rid)
