@@ -36,6 +36,22 @@ class UserService:
         user_pass_new = user_d.get('password_2')
         pass
 
+    def patch_update(self, user_d):
+        email = user_d.get('email', None)
+        name = user_d.get('name', None)
+        surname = user_d.get('surname', None)
+        genre_id = user_d.get('genre_id', None)
+        if email is not None:
+            user = self.get_user_by_username(email)
+            if name is not None:
+                user.name = name
+            if surname is not None:
+                user.surname = surname
+            if genre_id is not None:
+                user.genre_id = genre_id
+            return self.dao.update(user)
+        return False
+
     def delete(self, uid):
         return self.dao.delete(uid)
 
