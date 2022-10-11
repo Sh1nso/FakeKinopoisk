@@ -31,6 +31,6 @@ class RegisterView(Resource):
 
         check_user = user_service.check_uniq_user(req_user)
         if check_user:
-            return 'Пользователь с таким email уже есть в базе', 401
+            return 'Пользователь с таким email уже есть в базе', 400
         user = user_service.create(req_user)
         return 201
