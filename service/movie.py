@@ -8,15 +8,25 @@ class MovieService:
     def get_one(self, bid):
         return self.dao.get_one(bid)
 
+    def get_query(self):
+        return self.dao.get_query()
+
+    def get_all(self):
+        return self.dao.get_all()
+
+    def get_ordered(self):
+        return self.dao.get_all_ordered()
+
+    def get_paginate(self, page):
+        return self.dao.paginate_all(int(page))
     # доделать пагинацю
-    def get_all(self, filters):
-        if filters.get("status") is not None and filters.get("status") == "new":
-            movies = self.dao.get_all_ordered()
-        elif filters.get("page") is not None:
-            movies = self.dao.get_by_genre_id(filters.get("genre_id"))
-        else:
-            movies = self.dao.get_all()
-        return movies
+    # def get_all(self, filters):
+    #     movies = self.dao.get_all()
+    #     if filters.get("status") is not None and filters.get("status") == "new":
+    #         movies = self.dao.get_all_ordered()
+    #     if filters.get("page") is not None:
+    #         movies = movies.paginate(page=filters.get('page'),per_page=12)
+    #     return movies
 
     def create(self, movie_d):
         return self.dao.create(movie_d)

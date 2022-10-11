@@ -13,13 +13,18 @@ class MoviesView(Resource):
         # доделать пагинацию
         status = request.args.get("status")
         page = request.args.get("page")
-        filters = {
-            "status": status,
-            "page": page,
-        }
-        all_movies = movie_service.get_all(filters)
-        res = MovieSchema(many=True).dump(all_movies)
-        return res, 200
+        data = movie_service.get_query()
+        if status is not None:
+            data = movie_service.get_ordered()
+        if page is not None:
+            data = movie_service.get_paginate(page)
+        # filters = {
+        #     "status": status,
+        #     "page": page,
+        # }
+        # all_movies = movie_service.get_all(filters)
+        #res = MovieSchema(many=True).dump(data)
+        return 200
 
 
 @movie_ns.route('/<int:bid>')

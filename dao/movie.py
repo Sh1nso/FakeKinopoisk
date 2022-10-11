@@ -5,6 +5,9 @@ class MovieDAO:
     def __init__(self, session):
         self.session = session
 
+    def get_query(self):
+        return self.session.query(Movie)
+
     def get_one(self, bid):
         return self.session.query(Movie).get(bid)
 
@@ -22,6 +25,9 @@ class MovieDAO:
 
     def get_all_ordered(self):
         return self.session.query(Movie).order_by(Movie.year.desc()).all()
+
+    def paginate_all(self, page):
+        return self.session.query(Movie).paginate(page=page, per_page=12)
 
     def create(self, movie_d):
         ent = Movie(**movie_d)
