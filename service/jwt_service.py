@@ -23,11 +23,11 @@ class JwtService:
             return {"error": "Неверные учётные данные"}, 401
 
         user_pass = user_service.get_hash(password)
-        if password != user_pass:
+        if user_pass != user.password:
             return {"error": "Неверные учётные данные"}, 401
 
         data = {
-            "email": user.username
+            "email": user.email
         }
 
         min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)

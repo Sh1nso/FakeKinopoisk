@@ -20,13 +20,9 @@ class UserDAO:
         self.session.commit()
         return user
 
-    def update(self, user_d):
-        user = self.get_one(user_d.get("id"))
-        user.email = user_d.get("email")
-        user.password = user_d.get("password")
-        user.genre_id = user_d.get("genre_id")
-        user.name = user_d.get("name")
-        user.surname = user_d.get("surname")
+    def update_pass(self, user_d):
+        user = self.get_user_by_email(user_d["email"])
+        user.password = user_d.get("password_2")
 
         self.session.add(user)
         self.session.commit()

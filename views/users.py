@@ -12,3 +12,11 @@ class UsersView(Resource):
         req_data = request.json
         user = user_service.create(req_data)
         return 'Спасибо за регистрацию', 201
+
+
+@user_ns.route('/password')
+class UserPasswordView(Resource):
+    def put(self):
+        req_data = request.json
+        user = user_service.update_password(req_data)
+        return 'Пароль обновлен', 201

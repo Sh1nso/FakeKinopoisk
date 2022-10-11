@@ -28,5 +28,9 @@ class RegisterView(Resource):
         password = req_user.get('password', None)
         if None in [email, password]:
             return 'Введите необходимые данные', 404
+
+        check_user = user_service.check_uniq_user(req_user)
+        if check_user:
+            return 'Пользователь с таким email уже есть в базе', 401
         user = user_service.create(req_user)
         return 201

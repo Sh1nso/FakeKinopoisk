@@ -21,7 +21,7 @@ class MovieDAO:
         return self.session.query(Movie).filter(Movie.year == val).all()
 
     def get_all_ordered(self):
-        return self.session.query(Movie).order_by(Movie.year).all()
+        return self.session.query(Movie).order_by(Movie.year.desc()).all()
 
     def create(self, movie_d):
         ent = Movie(**movie_d)
