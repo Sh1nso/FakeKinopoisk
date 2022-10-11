@@ -26,4 +26,6 @@ class UserPasswordView(Resource):
     def put(self):
         req_data = request.json
         user = user_service.update_password(req_data)
-        return 'Пароль обновлен', 201
+        if user:
+            return 'Пароль обновлен', 201
+        return 'Неверный логин или пароль', 400

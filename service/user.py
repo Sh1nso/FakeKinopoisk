@@ -31,10 +31,18 @@ class UserService:
         return self.dao.create(user_d)
 
     def update_password(self, user_d):
-        user_email = user_d.get('user_email')
-        user_pass_old = user_d.get('password_1')
-        user_pass_new = user_d.get('password_2')
-        pass
+        user_email = user_d.get('email', None)
+        user_pass_old = user_d.get('password_1', None)
+        user_pass_new = user_d.get('password_2', None)
+        user = self.get_user_by_username(user_email)
+        if user is None or None in [user_email, user_pass_new, user_pass_old]:
+            return False
+
+        if not user.password == self.get_hash(user_pass_old):
+            return False
+
+        user.password = self.get_hash(user_pass_new)
+        return self.dao.update(user)
 
     def patch_update(self, user_d):
         email = user_d.get('email', None)
